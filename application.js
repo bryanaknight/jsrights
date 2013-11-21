@@ -12,6 +12,7 @@ $(function () {
 
   $("div.article h2").css('background', '#CCF')
   $("div.article h2").each(function (){
+
     var title = $(this).text();
     var url = title.trim().toLowerCase().replace(" ","_");
     console.log(url);
@@ -20,14 +21,21 @@ $(function () {
     console.log(title);
     var listItem = "<li>" + "<a href='#" + url + "'>" + title + "</a>"+  "</li>";
     $('#toc').append(listItem);
-    var toggleLink = $("<a href='#'>(hide)</a>");
+
+    var toggleLink = $("<a id='toggle-btn' href='#'>" + '(hide)' +"</a>");
+
     toggleLink.on('click', function(event){
+
+      var newText = "";
       $(this).siblings().toggle();
+
+      ($(this).text() === '(hide)') ? newText = "(show)" : newText = "(hide)";
+      
+      $(this).text(newText);
     });
+
     $(this).after(toggleLink);
-    var oldText = $(this).text();
-    var newText = (oldText === '(hide)') ? '(show)' : '(hide)'
-    
+
   });
 
 });
